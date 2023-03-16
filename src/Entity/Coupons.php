@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CouponsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,7 +16,7 @@ class Coupons
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 30, unique: true)]
+    #[ORM\Column(length: 10,unique: true)]
     private ?string $code = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -32,12 +34,20 @@ class Coupons
     #[ORM\Column]
     private ?bool $is_valid = null;
 
-    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
+    #[ORM\Column(type: 'datetime_immutable' , options: ['default'=>'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'coupons')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?CouponsTypes $coupons_types = null;
+    private ?CouponsTypes $coupon_types = null;
+
+    #[ORM\OneToMany(mappedBy: 'coupons', targetEntity: Orders::class)]
+    private Collection $orders;
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,14 +138,44 @@ class Coupons
         return $this;
     }
 
-    public function getCouponsTypes(): ?CouponsTypes
+    public function getCouponTypes(): ?CouponsTypes
     {
-        return $this->coupons_types;
+        return $this->coupon_types;
     }
 
-    public function setCouponsTypes(?CouponsTypes $coupons_types): self
+    public function setCouponTypes(?CouponsTypes $coupon_types): self
     {
-        $this->coupons_types = $coupons_types;
+        $this->coupon_types = $coupon_types;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Orders>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Orders $order): self
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setCoupons($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Orders $order): self
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getCoupons() === $this) {
+                $order->setCoupons(null);
+            }
+        }
 
         return $this;
     }

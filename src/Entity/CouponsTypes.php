@@ -18,7 +18,7 @@ class CouponsTypes
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'coupons_types', targetEntity: Coupons::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'coupon_types', targetEntity: Coupons::class, orphanRemoval: true)]
     private Collection $coupons;
 
     public function __construct()
@@ -55,7 +55,7 @@ class CouponsTypes
     {
         if (!$this->coupons->contains($coupon)) {
             $this->coupons->add($coupon);
-            $coupon->setCouponsTypes($this);
+            $coupon->setCouponTypes($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class CouponsTypes
     {
         if ($this->coupons->removeElement($coupon)) {
             // set the owning side to null (unless already changed)
-            if ($coupon->getCouponsTypes() === $this) {
-                $coupon->setCouponsTypes(null);
+            if ($coupon->getCouponTypes() === $this) {
+                $coupon->setCouponTypes(null);
             }
         }
 
