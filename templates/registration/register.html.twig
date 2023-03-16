@@ -3,15 +3,43 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_start(registrationForm) }}
+                <fieldset class = m-auto>
+                    <legend>
+                        Mon identité de Syhardeur
+                    </legend>
+                    {{ form_row(registrationForm.lastname) }}
+                    {{ form_row(registrationForm.firstname) }}
+                    {{ form_row(registrationForm.email) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                </fieldset>
+
+                <fieldset class="m-auto">
+                    <legend>
+                            Mes coordonnés
+                    </legend>
+                    {{ form_row(registrationForm.address) }}
+                    {{ form_row(registrationForm.zipcode) }}
+                    {{ form_row(registrationForm.city) }}
+                </fieldset>
+
+
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.RGPDConsent) }}
+
+                <button type="submit" class="btn btn-primary btn-lg ">S'inscrire</button>
+                {{ form_end(registrationForm) }}
+
+            </div>
+        </div>
+    </section>
+
+
 {% endblock %}

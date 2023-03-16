@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -46,6 +47,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type : 'datetime_immutable' , options: ['default'=> 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
+
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
+    private \Doctrine\Common\Collections\Collection $orders;
+
+
+
+    public function __construct()
+    {
+        $this->orders = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
+
+    }
 
     public function getId(): ?int
     {
