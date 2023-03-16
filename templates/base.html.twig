@@ -5,10 +5,9 @@
         <title>{% block title %}Acceuil{% endblock %} - SyhardStore</title>
         <meta name="viewport "content="width=device-width , initial-scale=1.0">
         <!-- Feuilles de styles -->
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ 'assets/css/style.css' }}">
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {% endblock %}
         <!-- Fin des feuilles de styles -->
     </head>
@@ -18,9 +17,9 @@
     {% include "_partials/footer.html.twig" %}
     </body>
     <!-- Fichiers JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
     {% block javascripts %}
-        <script src="{{ 'assets/js/bootstrap.bundle.min.js' }}" defer></script>
-        <script src="{{ 'assets/js/script.js' }}" defer></script>
+        <script src="{{ asset('assets/js/script.js') }}" defer></script>
     {% endblock %}
     <!-- Fin des fichiers JS -->
 </html>
