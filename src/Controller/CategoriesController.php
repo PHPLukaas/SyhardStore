@@ -13,7 +13,7 @@ class CategoriesController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('products/index.html.twig');
+        return $this->render('categories/index.html.twig');
     }
 
     #[Route('/{slug} ', name: 'list')]
