@@ -17,42 +17,42 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     use CreatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(type: 'string' ,length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+
+    #[ORM\Column(type: 'string')]
     private ?string $password = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(type: 'string', length: 100)]
     private ?string $lastname = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(type: 'string', length: 100)]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $address = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(type: 'string', length: 5)]
     private ?string $zipcode = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(type: 'string', length: 150)]
     private ?string $city = null;
 
-
+    #[ORM\Column(type: 'boolean')]
+    private $is_verified = false;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private \Doctrine\Common\Collections\Collection $orders;
-
-
 
     public function __construct()
     {
@@ -187,6 +187,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCity(string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->is_verified;
+    }
+
+    public function setIsVerified(bool $is_verified): self
+    {
+        $this->is_verified = $is_verified;
 
         return $this;
     }
