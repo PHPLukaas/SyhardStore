@@ -5,7 +5,7 @@
 
 {% block body %}
 
-    <h1><p class="text-center">Catégories</p></h1>
+    <h1 class="text-center">Catégories</h1>
 
     <div class="container">
 
@@ -26,7 +26,7 @@
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">{{ categorie.name }}</h5>
-                            <a href="#" class="btn btn-primary">Voir les produits</a>
+                            <a href="{{ path('categories_list', {slug: categorie.slug}) }}" class="btn btn-primary">Voir les produits</a>
                         </div>
                     </div>
                 </div>
