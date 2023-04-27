@@ -4,6 +4,38 @@
 
 
 {% block body %}
-    <h1>Site de e-commerce</h1>
-    <p>Bienvenue chez syhard company</p>
+
+    <h1><p class="text-center">Catégories</p></h1>
+
+    <div class="container">
+
+        <!-- CATEGORIES -->
+        <div class="row">
+            {% for categorie in categories %}
+                <!-- Categorie -->
+                <div class="col-lg-12">
+                {% if categorie.parent == null %}
+                    <div class="col-lg-3">
+                        <h3>{{ categorie.name }}</h3>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="col-lg-4 mb-5">
+                    <!-- Carte boostrap avec catégorie enfant -->
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ categorie.name }}</h5>
+                            <a href="#" class="btn btn-primary">Voir les produits</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+<div
+
 {% endblock %}

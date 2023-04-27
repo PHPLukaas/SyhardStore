@@ -1,36 +1,47 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
-            </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+<header>
+    <div class="px-3 py-2 text-bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="{{ path('app_main') }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                    <img src="{{ asset('assets/images/logo-syhard.png') }}" alt="logo" width="50" height="50">
+                    <span class="fs-4">Syhard.Store</span>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                    <li>
+                        <a href="{{ path('app_main') }}" class="nav-link text-secondary">
+                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+                            Accueil
+                        </a>
+                    </li>
+                    {% if app.user %}
+                        <li>
+                            <a href="#" class="nav-link text-white">
+                                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                                Mon Syhard
+                            </a>
+                        </li>
+                    {% else %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
-</nav>
+    <div class="px-3 py-2 border-bottom mb-3">
+        <div class="container d-flex flex-wrap justify-content-center">
+            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+                <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search">
+            </form>
+            {% if app.user %}
+                <div class="text-end">
+                    <a href="{{ path('app_logout') }}" class="btn btn-danger text-white me-2">Déconnexion</a>
+                </div>
+            {% else %}
+                <div class="text-end">
+                    <a href="{{ path('app_login') }}" class="btn btn-light text-dark me-2">Connexion à mon Syhard</a>
+                    <a href="{{ path('app_register') }}" class="btn btn-primary">Inscription</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</header>
