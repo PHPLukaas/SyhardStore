@@ -1,47 +1,128 @@
 <header>
-    <div class="px-3 py-2 text-bg-dark">
+    <!-- Jumbotron -->
+    <div class="p-3 text-center bg-white border-bottom">
         <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="{{ path('app_main') }}" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                    <img src="{{ asset('assets/images/logo-syhard.png') }}" alt="logo" width="50" height="50">
-                    <span class="fs-4">Syhard.Store</span>
-                </a>
-
-                <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-                    <li>
-                        <a href="{{ path('app_main') }}" class="nav-link text-secondary">
-                            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
-                            Accueil
-                        </a>
-                    </li>
-                    {% if app.user %}
-                        <li>
-                            <a href="#" class="nav-link text-white">
-                                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                                Mon Syhard
+            <div class="row gy-3">
+                <!-- Left elements -->
+                <div class="col-lg-2 col-sm-4 col-4">
+                    <a href="{{ path('app_main') }}" class="float-start">
+                        <img src="{{ asset('assets/images/logo-syhard.png') }}" height="40"  alt="Logo SyhardStore"/>
+                    </a>
+                </div>
+                <!-- Center elements -->
+                <div class="order-lg-last col-lg-5 col-sm-8 col-8">
+                    <div class="d-flex float-end">
+                        {% if app.user %}
+                            <a href="{{ path('profil_index') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-user m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">Mon Syhard</p>
                             </a>
-                        </li>
-                    {% else %}
-                    {% endif %}
-                </ul>
+                            <a href="{{ path('app_logout') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-eject m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">Déconnexion</p>
+                            </a>
+                            <a href="#" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fas fa-shopping-cart m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">Panier</p>
+                            </a>
+                        {% else %}
+                            <a href="{{ path('app_login') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-sign-in m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">Connexion à mon Syhard</p>
+                            </a>
+                            <a href="{{ path('app_register') }}" class="btn btn-primary py-1 px-3 d-flex align-items-center">
+                                <i class="fa-solid fa-user-plus m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">Inscription</p>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- Center elements -->
+
+                <!-- Right elements -->
+                <div class="col-lg-5 col-md-12 col-12">
+                    <div class="input-group float-center">
+                        <div class="form-outline">
+                            <input type="search" id="form1" class="form-control" />
+                            <label class="form-label" for="form1">Rechercher...</label>
+                        </div>
+                        <button type="button" class="btn btn-primary shadow-0">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- Right elements -->
             </div>
         </div>
     </div>
-    <div class="px-3 py-2 border-bottom mb-3">
-        <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-                <input type="search" class="form-control" placeholder="Rechercher..." aria-label="Search">
-            </form>
-            {% if app.user %}
-                <div class="text-end">
-                    <a href="{{ path('app_logout') }}" class="btn btn-danger text-white me-2">Déconnexion</a>
-                </div>
-            {% else %}
-                <div class="text-end">
-                    <a href="{{ path('app_login') }}" class="btn btn-light text-dark me-2">Connexion à mon Syhard</a>
-                    <a href="{{ path('app_register') }}" class="btn btn-primary">Inscription</a>
-                </div>
-            {% endif %}
+    <!-- Jumbotron -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f5f5f5;">
+        <!-- Container wrapper -->
+        <div class="container justify-content-center justify-content-md-between">
+            <!-- Toggle button -->
+            <button
+                    class="navbar-toggler border text-dark py-2"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarLeftAlignExample"
+                    aria-controls="navbarLeftAlignExample"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" aria-current="page" href="{{ path('app_main') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{{ path('categories_index') }}">Catégories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="{{ path('produits_index') }}">Hot offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Gift boxes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Menu item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Menu name</a>
+                    </li>
+                    <!-- Navbar dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-dark mb-0" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            Others
+                        </a>
+                        <!-- Dropdown menu -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">Action</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Another action</a>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Left links -->
+            </div>
         </div>
-    </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
 </header>
