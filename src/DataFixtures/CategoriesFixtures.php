@@ -22,7 +22,7 @@ class CategoriesFixtures extends Fixture
 
         $parent = $this->createCategory('Informatique', null, 1, manager: $manager,);
 
-        $this->createCategory('Ordinateur portables',0, $parent, $manager);
+        $this->createCategory('Ordinateur portables',$parent, 0, $manager);
         $this->createCategory('Ecran', $parent,0, $manager);
         $this->createCategory('Souris', $parent,0, $manager);
 
