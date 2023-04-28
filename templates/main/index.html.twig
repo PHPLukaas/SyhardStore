@@ -1,41 +1,193 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Acceuil{% endblock %}
-
-
 {% block body %}
-
-    <h1 class="text-center">Catégories</h1>
-
-    <div class="container">
-
-        <!-- CATEGORIES -->
-        <div class="row">
-            {% for categorie in categories %}
-                <!-- Categorie -->
-                <div class="col-lg-12">
-                {% if categorie.parent == null %}
-                    <div class="col-lg-3">
-                        <h3>{{ categorie.name }}</h3>
+    <!-- intro -->
+    <section class="pt-3">
+        <div class="container">
+            <div class="row gx-3">
+                <main class="col-lg-9">
+                    <div class="card-banner p-5 bg-primary rounded-5" style="height: 350px;">
+                        <div style="max-width: 500px;">
+                            <h2 class="text-white">
+                                Nouvelle collection Syhard !<br />
+                                <strong>En exclusivité</strong>
+                            </h2>
+                            <p class="text-white">T-shirt, tasses, coques pour téléphone, accessoires et bien plus encore! Venez découvrir notre collection</p>
+                            <a href="#" class="btn btn-light shadow-0 text-primary">Découvrir la collection</a>
+                        </div>
                     </div>
-                </div>
+                </main>
+                <aside class="col-lg-3">
+                    <div class="card-banner h-100 rounded-5" style="background-color: #f87217;">
+                        <div class="card-body text-center pb-5">
+                            <h5 class="pt-5 text-white">Carte Cadeau Syhard Store</h5>
+                            <p class="text-white">Offrez autour de vous pour faire plaisir. C'est le cadeau parfait !</p>
+                            <a href="#" class="btn btn-outline-light"> Voir nos cartes cadeaux </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+            <!-- row //end -->
+        </div>
+        <!-- container end.// -->
+    </section>
+    <!-- intro -->
 
-                {% else %}
-                <div class="col-lg-4 mb-5">
-                    <!-- Carte boostrap avec catégorie enfant -->
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ categorie.name }}</h5>
-                            <a href="{{ path('categories_list', {slug: categorie.slug}) }}" class="btn btn-primary">Voir les produits</a>
+    <!-- category -->
+    <section>
+        <div class="container pt-5">
+            <nav class="row gy-4">
+                <div class="col-lg-6 col-md-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-couch fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Interior items</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-basketball-ball fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Sport and travel</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-ring fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Jewellery</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-clock fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Accessories</div>
+                            </a>
                         </div>
                     </div>
                 </div>
-                {% endif %}
-
-            {% endfor %}
-
+                <div class="col-lg-6 col-md-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-car-side fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Automobiles</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-home fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Home items</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-guitar fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Musical items</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-book fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Book, reading</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-baby-carriage fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Kid's toys</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-paw fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Pet items</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-tshirt fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Men's clothing</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-shoe-prints fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Men's clothing</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="row">
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-mobile fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Smartphones</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-tools fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Tools</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-pencil-ruler fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Education</div>
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <a href="#" class="text-center d-flex flex-column justify-content-center">
+                                <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-warehouse fa-xl fa-fw"></i>
+                                </button>
+                                <div class="text-dark">Other items</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
-
-<div
-
+    </section>
+    <!-- category -->
 {% endblock %}
+
+{% block title %}
+Accueil
+{% endblock %}
+

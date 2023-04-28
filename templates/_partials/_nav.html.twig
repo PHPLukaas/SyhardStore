@@ -85,41 +85,26 @@
                         <a class="nav-link text-dark" href="{{ path('categories_index') }}">Catégories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{{ path('produits_index') }}">Hot offers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Gift boxes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Menu item</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Menu name</a>
+                        <a class="nav-link text-dark" href="{{ path('produits_index') }}">Produits</a>
                     </li>
                     <!-- Navbar dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-dark mb-0" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                            Others
+                            Autres
                         </a>
                         <!-- Dropdown menu -->
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="#">Action</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">Another action</a>
-                            </li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item" href="#">Rien lol</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <!-- Left links -->
+                <!-- Danger button if email adress is not verified -->
+                {% if app.user and not app.user.isVerified %}
+                    <a href="{{ path('renvoie_verif') }}" class="btn btn-danger">Votre compte n'est pas vérifié, cliquez pour re-envoyer un mail de vérification.</a>
+                {% endif %}
             </div>
         </div>
         <!-- Container wrapper -->
