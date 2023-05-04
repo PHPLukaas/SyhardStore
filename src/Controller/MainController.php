@@ -17,4 +17,13 @@ class MainController extends AbstractController
                 ['categoryOrder' => 'ASC']),
         ]);
     }
+
+    #[Route('/dev', name: 'app_dev')]
+    public function dev(CategoriesRepository $categoriesRepository): Response
+    {
+        return $this->render('main/index2.html.twig', [
+            'categories' => $categoriesRepository->findBy([],
+                ['categoryOrder' => 'ASC']),
+        ]);
+    }
 }
