@@ -33,22 +33,21 @@
     </section>
     <!-- intro -->
 
-    <!-- category -->
     <section>
         <div class="container pt-5">
             <nav class="row gy-4">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-12 col-md-12">
                     <div class="row">
                         {% for categorie in categories %}
-                            {% if categorie.parent != null %}
-                                <div class="col-3">
-                                    <a href="{{ path('categories_list', {slug: categorie.slug}) }}" class="text-center d-flex flex-column justify-content-center">
-                                        <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
-                                            <i class="{{ categorie.icon }} fa-xl fa-fw"></i>
-                                        </button>
-                                        <div class="text-dark">{{ categorie.name }}</div>
-                                    </a>
-                                </div>
+                            {% if categorie.parent is not null %}
+                            <div class="col-3">
+                                <a href="{{ path('categories_list', {slug: categorie.slug}) }}" class="text-center d-flex flex-column justify-content-center">
+                                    <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                        <i class="{{ categorie.icon }} fa-xl fa-fw"></i>
+                                    </button>
+                                    <div class="text-dark">{{ categorie.name }}</div>
+                                </a>
+                            </div>
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -56,7 +55,6 @@
             </nav>
         </div>
     </section>
-    <!-- category -->
 {% endblock %}
 
 {% block title %}
