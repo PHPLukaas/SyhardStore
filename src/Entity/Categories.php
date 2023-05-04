@@ -33,6 +33,9 @@ class Categories
     #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Products::class)]
     private Collection $products;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Icon = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -136,6 +139,18 @@ class Categories
                 $product->setCategories(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->Icon;
+    }
+
+    public function setIcon(string $Icon): self
+    {
+        $this->Icon = $Icon;
 
         return $this;
     }
