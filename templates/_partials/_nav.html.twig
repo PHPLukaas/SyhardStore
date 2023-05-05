@@ -25,6 +25,12 @@
                                 <i class="fas fa-shopping-cart m-1 me-md-2"></i>
                                 <p class="d-none d-md-block mb-0">Panier</p>
                             </a>
+                            {% if is_granted('ROLE_PRODUCT_ADMIN') %}
+                                <a href="{{ path('admin_index') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                    <i class="fa-solid fa-gear m-1 me-md-2"></i>
+                                    <p class="d-none d-md-block mb-0">Administration</p>
+                                </a>
+                            {% endif %}
                         {% else %}
                             <a href="{{ path('app_login') }}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
                                 <i class="fa-solid fa-sign-in m-1 me-md-2"></i>
