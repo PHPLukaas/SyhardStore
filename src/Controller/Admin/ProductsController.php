@@ -20,7 +20,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProductsController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(ProductsRepository $productsRepository, ImagesRepository $imagesRepository): Response
+    public function index(ProductsRepository $productsRepository): Response
     {
         $produits = $productsRepository->findAll();
 
@@ -156,6 +156,7 @@ class ProductsController extends AbstractController
     }
 
     #[Route('/suppression/image/{id}', name: 'delete_image' , methods: ['DELETE'])]
+
     public function delete_image(Images $images , Request $request , EntityManagerInterface $em , PictureService $pictureService): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
