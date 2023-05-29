@@ -24,7 +24,14 @@
                     {% for produit in produits %}
                         <tr>
                             <td>{{ produit.id }}</td>
-                            <td><img src="{{ asset('assets/images/logo-syhard.png' ~ produit.images[0].name) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
+                            {% if produit.images is not empty %}
+                                {% set firstImage = produit.images.first() %}
+                                <td><img src="{{ asset('assets/uploads/products/mini/300-300-' ~ firstImage.name ) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
+                            {% else %}
+                                <td>Aucune image disponible</td>
+                            {% endif %}
+
+
                             <td>{{ produit.name }}</td>
                             <td>{{ produit.prix }}</td>
                             <td>{{ produit.stock }}</td>
