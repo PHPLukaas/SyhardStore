@@ -1,5 +1,5 @@
-<h1>Activez votre compte</h1>
+<h1>Activez mon compte</h1>
 <p>Bonjour {{ user.firstname }},</p>
-<p>Voter inscription n'est pas valider, en cliquant sur le lien ci-dessous vous deviendrez un Syhardien</p>
-<p><a href="{{ absolute_url(path('verify_user', {token: token}))  }}">Activer mon compte</a></p>
-<p>Ce lien expire dans 3 heures</p>
+<p>Votre inscription n'est pas encore validée. En cliquant sur le lien ci-dessous.</p>
+<p><a href="{{ absolute_url(path('verify_user', {token: token})) }}">Activer mon compte</a></p>
+<p>Ce lien expire dans 3 heures.</p>
