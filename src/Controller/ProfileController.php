@@ -14,7 +14,13 @@ class ProfileController extends AbstractController
     public function index(): Response
     {
         return $this->render('profile/index.html.twig', [
-            'controller_name' => 'Profil de l\'utilisateur ',
+            'compte' => 'Votre compte Syhard',
+            'firstname' => $this->getUser()->getFirstname(),
+            'lastname' => $this->getUser()->getLastname(),
+            'email' => $this->getUser()->getEmail(),
+            'adresse' => $this->getUser()->getAddress(),
+            'ville' => $this->getUser()->getCity(),
+            'code_postal' => $this->getUser()->getZipcode(),
         ]);
     }
 
