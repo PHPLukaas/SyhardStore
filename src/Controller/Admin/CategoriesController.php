@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Products;
 use App\Repository\CategoriesRepository;
+use App\Repository\ImagesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +16,7 @@ class CategoriesController extends AbstractController
     public function index(CategoriesRepository $categoriesRepository): Response
     {
         $categories = $categoriesRepository->findBy([], ['categoryOrder' => 'asc']);
+
 
         return $this->render('admin/categories/index.html.twig', compact('categories'));
     }
