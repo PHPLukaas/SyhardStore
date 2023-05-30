@@ -63,6 +63,11 @@ default:
                 $src_x =($imageWidth - $squareSize)/2;
                 $src_y= 0;
                 break;
+            default:
+                $squareSize = $imageWidth;
+                $src_x = 0;
+                $src_y = 0;
+                break;
         }
         $resized_picture = imagecreatetruecolor($width,$height);
 
