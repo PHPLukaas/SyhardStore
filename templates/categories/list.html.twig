@@ -8,7 +8,8 @@
         </div>
     {% for product in products.data %}
         <div class="col-3 mb-3">
-
+            <img src="{{ asset('assets/uploads/products/mini/300-300-') ~ image.name }}"
+                 class="card-img-top" alt="{{ product.name }}">
             <div class="card h-100">
                 <h2 class="card-title">{{ product.name }}</h2>
                 <p class="card-texte">{{ product.description }}</p>
@@ -23,5 +24,5 @@
         {% set pages = products.pages %}
         {% set currentPage = products.page %}
         {% include '_partials/_pagination.html.twig' %}
-    </div>
+
 {% endblock %}

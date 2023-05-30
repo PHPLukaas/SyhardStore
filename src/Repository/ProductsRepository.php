@@ -98,4 +98,16 @@ class ProductsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+// Fonction qui récupère les derniers produits ajoutés
+    public function findLatest(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

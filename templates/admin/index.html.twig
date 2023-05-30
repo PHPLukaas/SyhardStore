@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Bienvenue sur notre interface d'administration</h1>
+
+
+                <h2>Voici nos conditions :</h2>
+                <p>1 Pertinence : Assurez-vous que le produit réponde aux besoins et aux attentes spécifiques du client. Considérez ses préférences, son secteur d'activité, ses objectifs et sa clientèle cible.</p>
+
+                    <p>2 Adéquation budgétaire : Vérifiez que le produit est conforme au budget du client. Évaluez le coût d'acquisition, les frais d'exploitation et les avantages économiques attendus.</p>
+
+                <p>3 Compatibilité : Assurez-vous que le produit s'intègre facilement aux systèmes et aux processus existants du client. Il est important de tenir compte de l'infrastructure technologique, des logiciels, des ressources humaines et des compétences nécessaires pour l'utiliser efficacement.</p>
+
+                <p> 4 Fiabilité et qualité : Évaluez la réputation du fournisseur ou du fabricant du produit. Vérifiez les certifications, les garanties et les témoignages de clients existants pour vous assurer de la fiabilité et de la qualité du produit.</p>
+
+                <p>  5 Support et maintenance : Renseignez-vous sur les services de support technique et de maintenance offerts par le fournisseur. Assurez-vous que le client bénéficiera d'un soutien adéquat après l'achat, notamment en cas de problèmes ou de questions.</p>
+
+                <p> 6 Évolutivité : Envisagez la capacité du produit à évoluer et à s'adapter aux besoins futurs du client. Vérifiez si des mises à jour, des extensions ou des fonctionnalités supplémentaires sont disponibles pour accompagner la croissance ou les changements de l'entreprise du client.</p>
+
+                <p>  7 Retour sur investissement : Évaluez les avantages potentiels que le produit peut apporter au client. Considérez les gains d'efficacité, l'amélioration des processus, l'augmentation des revenus ou toute autre mesure de succès pertinente.
+
+                </p>
+
+
+                <div class="text-bg-primary text-lg-center">Merci à vous de nous faire confiance</div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
