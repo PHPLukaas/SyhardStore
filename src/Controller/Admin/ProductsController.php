@@ -155,7 +155,7 @@ class ProductsController extends AbstractController
         return $this->render('admin/products/index.html.twig');
     }
 
-    #[Route('/suppression/image/{id}', name: 'delete_image' , methods: ['DELETE'])]
+    #[Route('/suppression/image/{id}', name: 'delete_image' , methods: ['DELETE', 'GET'])]
 
     public function delete_image(Images $images , Request $request , EntityManagerInterface $em , PictureService $pictureService): JsonResponse
     {
