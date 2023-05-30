@@ -14,14 +14,31 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Products|null findOneBy(array $criteria, array $orderBy = null)
  * @method Products[]    findAll()
  * @method Products[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * Repository de l'entité Products.
+ *
+ * @extends ServiceEntityRepository<Products>
  */
 class ProductsRepository extends ServiceEntityRepository
 {
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Products::class);
     }
 
+    /**
+     * Enregistre l'entité Products.
+     *
+     * @param Products $entity L'entité Products à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(Products $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -31,6 +48,14 @@ class ProductsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Supprime l'entité Products.
+     *
+     * @param Products $entity L'entité Products à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(Products $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -40,6 +65,15 @@ class ProductsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Recherche les produits de manière paginée en fonction de la page, du slug et de la limite.
+     *
+     * @param int $page Le numéro de la page.
+     * @param string $slug Le slug de la catégorie.
+     * @param int $limit La limite de produits par page.
+     *
+     * @return array Un tableau contenant les données des produits paginés.
+     */
     public function findProductsPaginated(int $page, string $slug, int $limit = 6): array
     {
         $limit = abs($limit);
@@ -99,7 +133,11 @@ class ProductsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-// Fonction qui récupère les derniers produits ajoutés
+    /**
+     * Récupère les derniers produits ajoutés.
+     *
+     * @return Products[] Un tableau contenant les derniers produits ajoutés.
+     */
     public function findLatest(): array
     {
         return $this->createQueryBuilder('p')

@@ -14,6 +14,13 @@ class ProductsFixtures extends Fixture
 
     }
 
+    /**
+     * Charge les données des produits.
+     *
+     * @param ObjectManager $manager L'instance du gestionnaire d'objets.
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
        $faker = Faker\Factory::create('fr_FR');
@@ -33,10 +40,7 @@ class ProductsFixtures extends Fixture
 
 
            $manager->persist($product);
-
-
        }
-
         $manager->flush();
     }
 }

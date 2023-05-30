@@ -9,13 +9,30 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CategoriesFixtures extends Fixture
 {
+    /**
+     * Compteur de création de références.
+     *
+     * @var int
+     */
     private $counter = 1;
 
+    /**
+     * CategoriesFixtures constructeur.
+     *
+     * @param SluggerInterface $slugger Le service slugger pour générer des slugs.
+     */
     public function __construct(private SluggerInterface $slugger)
     {
 
     }
 
+    /**
+     * Charge les données des catégories.
+     *
+     * @param ObjectManager $manager L'instance du gestionnaire d'objets.
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
 
@@ -34,6 +51,17 @@ class CategoriesFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * Crée une catégorie.
+     *
+     * @param string         $name           Le nom de la catégorie.
+     * @param Categories|null $parent         La catégorie parente.
+     * @param int            $categoryOrder  L'ordre de la catégorie.
+     * @param string         $categoryIcon   L'icône de la catégorie.
+     * @param ObjectManager  $manager        L'instance du gestionnaire d'objets.
+     *
+     * @return Categories La catégorie créée.
+     */
     public function createCategory(string $name, Categories $parent = null, int $categoryOrder, string $categoryIcon, ObjectManager $manager, )
     {
         $category = new Categories();

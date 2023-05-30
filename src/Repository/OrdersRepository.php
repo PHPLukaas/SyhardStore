@@ -13,14 +13,31 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Orders|null findOneBy(array $criteria, array $orderBy = null)
  * @method Orders[]    findAll()
  * @method Orders[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * Repository de l'entité Orders.
+ *
+ * @extends ServiceEntityRepository<Orders>
  */
 class OrdersRepository extends ServiceEntityRepository
 {
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Orders::class);
     }
 
+    /**
+     * Enregistre l'entité Orders.
+     *
+     * @param Orders $entity L'entité Orders à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(Orders $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +47,14 @@ class OrdersRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Supprime l'entité Orders.
+     *
+     * @param Orders $entity L'entité Orders à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(Orders $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

@@ -17,8 +17,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/**
+ * Contrôleur de l'inscription des utilisateurs.
+ */
 class RegistrationController extends AbstractController
 {
+    /**
+     * Gère le processus d'inscription des utilisateurs.
+     *
+     * @param Request $request La requête HTTP.
+     * @param UserPasswordHasherInterface $userPasswordHasher Le gestionnaire de hachage des mots de passe des utilisateurs.
+     * @param UserAuthenticatorInterface $userAuthenticator L'authentificateur d'utilisateur.
+     * @param UsersAuthentificatorAuthenticator $authenticator L'authentificateur d'utilisateurs Syhard.
+     * @param EntityManagerInterface $entityManager L'interface pour interagir avec l'entité User.
+     * @param SendMailService $mail Le service d'envoi de mails.
+     * @param JWTService $jwt Le service de gestion des JSON Web Tokens (JWT).
+     * @return Response La réponse HTTP.
+     */
     #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UsersAuthentificatorAuthenticator $authenticator, EntityManagerInterface $entityManager, SendMailService $mail, JWTService $jwt): Response
     {
@@ -77,6 +92,15 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    /**
+     * Vérifie et active le compte utilisateur à partir du token.
+     *
+     * @param string $token Le token de vérification.
+     * @param JWTService $jwt Le service de gestion des JSON Web Tokens (JWT).
+     * @param UsersRepository $usersRepository Le repository des utilisateurs.
+     * @param EntityManagerInterface $em L'interface pour interagir avec l'entité User.
+     * @return Response La réponse HTTP.
+     */
     #[Route('/verif/{token}', name: 'verify_user')]
     public function verifyUser($token, JWTService $jwt, UsersRepository $usersRepository, EntityManagerInterface $em): Response
     {
@@ -105,6 +129,14 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('app_login');
     }
 
+    /**
+     * Renvoie un nouvel e-mail de vérification à l'utilisateur.
+     *
+     * @param JWTService $jwt Le service de gestion des JSON Web Tokens (JWT).
+     * @param SendMailService $mail Le service d'envoi de mails.
+     * @param UsersRepository $usersRepository Le repository des utilisateurs.
+     * @return Response La réponse HTTP.
+     */
     #[Route('/renvoieverif', name: 'renvoie_verif')]
     public function resendVerif(JWTService $jwt, SendMailService $mail, UsersRepository $usersRepository): Response
     {

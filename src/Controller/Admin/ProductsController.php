@@ -16,26 +16,54 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+/**
+ * Contrôleur gérant les produits dans l'administration.
+ *
+ * @Route('/admin/produits', name="admin_products_")
+ */
 #[Route('/admin/produits', name: 'admin_products_')]
 class ProductsController extends AbstractController
 {
+    /**
+     * Affiche la liste des produits.
+     *
+     * @param ProductsRepository $productsRepository Le référentiel (repository) des produits
+     *
+     * @return Response La réponse HTTP contenant la vue des produits
+     *
+     * @Route("/", name="index")
+     */
     #[Route('/', name: 'index')]
     public function index(ProductsRepository $productsRepository): Response
     {
+        // Récupère la liste des produits en utilisant le repository des produits
         $produits = $productsRepository->findAll();
 
-
+        // Renvoie la vue des produits en passant les produits récupérés comme variable
         return $this->render('admin/products/index.html.twig', compact('produits'));
     }
+
+    /**
+     * Ajoute un nouveau produit.
+     *
+     * @param Request                $request          L'objet Request contenant les données de la requête
+     * @param EntityManagerInterface $em               L'EntityManager pour la gestion des entités
+     * @param SluggerInterface       $slugger          L'interface Slugger pour la génération des slugs
+     * @param PictureService         $pictureService   Le service PictureService pour la gestion des images
+     *
+     * @return Response La réponse HTTP
+     *
+     * @Route("/ajout", name="add")
+     */
     #[Route('/ajout', name: 'add')]
     public function add(Request $request, EntityManagerInterface $em , SluggerInterface $slugger , PictureService $pictureService): Response
     {
+        // Vérifie les droits d'accès de l'utilisateur
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-
 
         //création d'un produit
         $product = new Products();
+
         // Creation formulaire
         $productForm = $this->createForm(ProductsFormType::class,$product);
 
@@ -84,19 +112,34 @@ class ProductsController extends AbstractController
 
 
     }
+
+    /**
+     * Modifie un produit existant.
+     *
+     * @param Products              $product           Le produit à modifier
+     * @param Request               $request           L'objet Request contenant les données de la requête
+     * @param EntityManagerInterface $em               L'EntityManager pour la gestion des entités
+     * @param SluggerInterface      $slugger          L'interface Slugger pour la génération des slugs
+     * @param PictureService        $pictureService   Le service PictureService pour la gestion des images
+     * @param ImagesRepository      $imagesRepository Le référentiel (repository) des images
+     *
+     * @return Response La réponse HTTP
+     *
+     * @Route("/edition/{id}", name="edit")
+     */
     #[Route('/edition/{id}', name: 'edit')]
     public function edit(Products $product, Request $request, EntityManagerInterface $em ,
                          SluggerInterface $slugger ,PictureService $pictureService, ImagesRepository $imagesRepository): Response
     {
 
-        //On verif si user peut edit avec voter
+        // Vérifie si l'utilisateur peut modifier le produit en utilisant un système de vote
         $this->denyAccessUnlessGranted('PRODUCT_EDIT' , $product);
         //Divise le prix
          //$prix = $product->getPrix() / 100 ;
          //$product->setPrix($prix);
 
+        // Récupération de l'image
         $image = $imagesRepository->findBy(['products'=>$product]);
-
         $product->addImage($image[0]);
 
         // Creation formulaire
@@ -145,9 +188,15 @@ class ProductsController extends AbstractController
 
     }
 
-
-
-
+    /**
+     * Supprime un produit.
+     *
+     * @param Products $product Le produit à supprimer
+     *
+     * @return Response La réponse HTTP
+     *
+     * @Route("/suppression/{id}", name="delete")
+     */
     #[Route('/suppression/{id}', name: 'delete')]
     public function delete(Products $product): Response
     {
@@ -155,6 +204,18 @@ class ProductsController extends AbstractController
         return $this->render('admin/products/index.html.twig');
     }
 
+    /**
+     * Supprime une image d'un produit.
+     *
+     * @param Images                $images            L'image à supprimer
+     * @param Request               $request           L'objet Request contenant les données de la requête
+     * @param EntityManagerInterface $em               L'EntityManager pour la gestion des entités
+     * @param PictureService        $pictureService   Le service PictureService pour la gestion des images
+     *
+     * @return JsonResponse La réponse JSON
+     *
+     * @Route("/suppression/image/{id}", name="delete_image", methods={"DELETE", "GET"})
+     */
     #[Route('/suppression/image/{id}', name: 'delete_image' , methods: ['DELETE', 'GET'])]
 
     public function delete_image(Images $images , Request $request , EntityManagerInterface $em , PictureService $pictureService): JsonResponse

@@ -15,6 +15,14 @@ class UsersFixtures extends Fixture
     ,private SluggerInterface $slugger){
 
     }
+
+    /**
+     * Charge les données des utilisateurs.
+     *
+     * @param ObjectManager $manager L'instance du gestionnaire d'objets.
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $admin = new Users();

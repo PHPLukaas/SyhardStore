@@ -4,17 +4,20 @@ namespace App\Service;
 
 use DateTimeImmutable;
 
+
+/**
+ * Service pour la gestion des JWT (JSON Web Tokens).
+ */
 class JWTService
 {
-    // on génère un token
-
     /**
-     * Génération d'un token JWT
-     * @param array $header
-     * @param array $payload
-     * @param string $secret
-     * @param int $validity
-     * @return string
+     * Génère un token JWT.
+     *
+     * @param array $header Les données du header du token.
+     * @param array $payload Les données du payload du token.
+     * @param string $secret Le secret utilisé pour la génération de la signature.
+     * @param int $validity La durée de validité du token en secondes.
+     * @return string Le token JWT généré.
      */
     public function generate(array $header, array $payload, string $secret, int $validity = 10800): string
     {
@@ -50,7 +53,12 @@ class JWTService
         return $jwt;
     }
 
-    // on verifie que le token est valide (correctemment fermé)
+    /**
+     * Vérifie si un token est valide (correctement formé).
+     *
+     * @param string $token Le token à vérifier.
+     * @return bool True si le token est valide, sinon false.
+     */
     public function isValid(string $token): bool
     {
         return preg_match(
@@ -59,7 +67,12 @@ class JWTService
         ) === 1;
     }
 
-    // on récupère le payload du token
+    /**
+     * Récupère le payload d'un token.
+     *
+     * @param string $token Le token à partir duquel extraire le payload.
+     * @return array Le tableau associatif représentant le payload.
+     */
     public function getPayload(string $token): array
     {
         //on démonte le token
@@ -70,7 +83,12 @@ class JWTService
         return $payload;
     }
 
-    //on récupère le header du token
+    /**
+     * Récupère le header d'un token.
+     *
+     * @param string $token Le token à partir duquel extraire le header.
+     * @return array Le tableau associatif représentant le header.
+     */
     public function getHeader(string $token): array
     {
         //on démonte le token
@@ -81,7 +99,12 @@ class JWTService
         return $header;
     }
 
-    // on verifie que le token a expiré
+    /**
+     * Vérifie si un token a expiré.
+     *
+     * @param string $token Le token à vérifier.
+     * @return bool True si le token a expiré, sinon false.
+     */
     public function isExpired(string $token): bool
     {
         $payload = $this->getPayload($token);
@@ -89,7 +112,13 @@ class JWTService
         return $payload['exp'] < $now->getTimestamp();
     }
 
-    // on verifie la signature du token
+    /**
+     * Vérifie la signature d'un token.
+     *
+     * @param string $token Le token à vérifier.
+     * @param string $secret Le secret utilisé pour la génération de la signature.
+     * @return bool True si la signature du token est valide, sinon false.
+     */
     public function check(string $token, string $secret)
     {
         // on recupere le header et le payload

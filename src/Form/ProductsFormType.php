@@ -18,6 +18,14 @@ use Symfony\Component\Validator\Constraints\Positive;
 
 class ProductsFormType extends AbstractType
 {
+    /**
+     * Construit le formulaire de création/modification des produits.
+     *
+     * @param FormBuilderInterface $builder L'instance du constructeur de formulaire.
+     * @param array $options Les options du formulaire.
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -53,6 +61,13 @@ class ProductsFormType extends AbstractType
             ]);
     }
 
+    /**
+     * Configure les options du formulaire.
+     *
+     * @param OptionsResolver $resolver L'instance du résolveur d'options.
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

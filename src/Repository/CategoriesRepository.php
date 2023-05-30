@@ -13,14 +13,31 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Categories|null findOneBy(array $criteria, array $orderBy = null)
  * @method Categories[]    findAll()
  * @method Categories[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * Repository de l'entité Categories.
+ *
+ * @extends ServiceEntityRepository<Categories>
  */
 class CategoriesRepository extends ServiceEntityRepository
 {
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Categories::class);
     }
 
+    /**
+     * Enregistre l'entité Categories.
+     *
+     * @param Categories $entity L'entité Categories à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(Categories $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +47,14 @@ class CategoriesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Supprime l'entité Categories.
+     *
+     * @param Categories $entity L'entité Categories à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(Categories $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

@@ -16,11 +16,24 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OrdersDetailsRepository extends ServiceEntityRepository
 {
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, OrdersDetails::class);
     }
 
+    /**
+     * Enregistre l'entité OrdersDetails.
+     *
+     * @param OrdersDetails $entity L'entité OrdersDetails à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(OrdersDetails $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +43,14 @@ class OrdersDetailsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Supprime l'entité OrdersDetails.
+     *
+     * @param OrdersDetails $entity L'entité OrdersDetails à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(OrdersDetails $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

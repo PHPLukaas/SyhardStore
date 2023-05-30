@@ -5,15 +5,33 @@ namespace App\Service;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * Service pour la gestion des images.
+ */
 class PictureService
 {
     private $params;
 
+    /**
+     * Constructeur de la classe PictureService.
+     *
+     * @param ParameterBagInterface $params L'objet de gestion des paramètres.
+     */
     public function __construct(ParameterBagInterface $params)
     {
         $this->params = $params;
     }
 
+    /**
+     * Ajoute une image avec des options de redimensionnement.
+     *
+     * @param UploadedFile $picture L'image à ajouter.
+     * @param string|null $folder Le dossier dans lequel stocker l'image (par défaut : racine).
+     * @param int|null $width La largeur souhaitée de l'image redimensionnée (par défaut : 250).
+     * @param int|null $height La hauteur souhaitée de l'image redimensionnée (par défaut : 250).
+     * @return string Le nom du fichier de l'image ajoutée.
+     * @throws Exception Si le format de l'image est incorrect.
+     */
     public function add(UploadedFile $picture, ?string $folder = '', ?int $width = 250, ?int $height = 250)
     {
         //on donne un nouveau nom à l'image
@@ -83,6 +101,16 @@ default:
 
         return $fichier;
     }
+
+    /**
+     * Supprime une image avec des options de redimensionnement.
+     *
+     * @param string $fichier Le nom du fichier de l'image à supprimer.
+     * @param string|null $folder Le dossier dans lequel l'image est stockée (par défaut : racine).
+     * @param int|null $width La largeur de l'image redimensionnée (par défaut : 250).
+     * @param int|null $height La hauteur de l'image redimensionnée (par défaut : 250).
+     * @return bool True si l'image a été supprimée avec succès, False sinon.
+     */
     public function delete(string $fichier , ?string $folder = '' , ?int $width =250 , ?int $height = 250){
         if($fichier !== 'default.webp'){
             $success = false ;

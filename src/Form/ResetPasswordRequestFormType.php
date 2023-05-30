@@ -9,6 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResetPasswordRequestFormType extends AbstractType
 {
+    /**
+     * Construit le formulaire de demande de réinitialisation du mot de passe.
+     *
+     * @param FormBuilderInterface $builder L'instance du constructeur de formulaire.
+     * @param array $options Les options du formulaire.
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -22,6 +30,14 @@ class ResetPasswordRequestFormType extends AbstractType
         ;
     }
 
+
+    /**
+     * Configure les options du formulaire.
+     *
+     * @param OptionsResolver $resolver L'instance du résolveur d'options.
+     *
+     * @return void
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

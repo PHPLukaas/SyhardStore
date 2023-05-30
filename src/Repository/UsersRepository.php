@@ -16,14 +16,30 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  * @method Users|null findOneBy(array $criteria, array $orderBy = null)
  * @method Users[]    findAll()
  * @method Users[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Repository de l'entité Users.
+ *
+ * @extends ServiceEntityRepository<Users>
  */
 class UsersRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Users::class);
     }
 
+    /**
+     * Enregistre l'entité Users.
+     *
+     * @param Users $entity L'entité Users à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(Users $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -33,6 +49,14 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
         }
     }
 
+    /**
+     * Supprime l'entité Users.
+     *
+     * @param Users $entity L'entité Users à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(Users $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -43,7 +67,14 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * Utilisé pour mettre à jour automatiquement (rehasher) le mot de passe de l'utilisateur.
+     *
+     * @param PasswordAuthenticatedUserInterface $user L'utilisateur authentifié par mot de passe.
+     * @param string $newHashedPassword Le nouveau mot de passe hashé.
+     *
+     * @throws UnsupportedUserException Si l'utilisateur n'est pas une instance de Users.
+     *
+     * @return void
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {

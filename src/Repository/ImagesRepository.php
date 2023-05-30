@@ -13,14 +13,32 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Images|null findOneBy(array $criteria, array $orderBy = null)
  * @method Images[]    findAll()
  * @method Images[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ *
+ * Repository de l'entité Images.
+ *
+ * @extends ServiceEntityRepository<Images>
  */
 class ImagesRepository extends ServiceEntityRepository
 {
+
+    /**
+     * Construit une nouvelle instance du repository.
+     *
+     * @param ManagerRegistry $registry Le registre du gestionnaire d'entités.
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Images::class);
     }
 
+    /**
+     * Enregistre l'entité Images.
+     *
+     * @param Images $entity L'entité Images à enregistrer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function save(Images $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -30,6 +48,14 @@ class ImagesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Supprime l'entité Images.
+     *
+     * @param Images $entity L'entité Images à supprimer.
+     * @param bool $flush Indique s'il faut exécuter l'opération de flush.
+     *
+     * @return void
+     */
     public function remove(Images $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);

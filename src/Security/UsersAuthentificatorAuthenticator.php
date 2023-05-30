@@ -15,16 +15,32 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+
+/**
+ * Authenticator pour l'authentification des utilisateurs.
+ */
 class UsersAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
 
+    /**
+     * Construit une nouvelle instance de l'authentificateur.
+     *
+     * @param UrlGeneratorInterface $urlGenerator L'interface du générateur d'URL.
+     */
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
     }
 
+    /**
+     * Authentifie l'utilisateur en vérifiant les informations d'identification.
+     *
+     * @param Request $request La requête.
+     *
+     * @return Passport Le passeport d'authentification.
+     */
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -40,6 +56,15 @@ class UsersAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    /**
+     * Redirige l'utilisateur après une authentification réussie.
+     *
+     * @param Request $request La requête.
+     * @param TokenInterface $token Le jeton d'authentification.
+     * @param string $firewallName Le nom du pare-feu.
+     *
+     * @return Response|null La réponse de redirection ou null si aucune redirection n'est nécessaire.
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
@@ -51,6 +76,13 @@ class UsersAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
+    /**
+     * Renvoie l'URL de la page de connexion.
+     *
+     * @param Request $request La requête.
+     *
+     * @return string L'URL de la page de connexion.
+     */
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

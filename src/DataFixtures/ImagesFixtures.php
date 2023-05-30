@@ -10,6 +10,13 @@ use Faker ;
 
 class ImagesFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * Charge les données des images.
+     *
+     * @param ObjectManager $manager L'instance du gestionnaire d'objets.
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -23,6 +30,11 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
     }
+    /**
+     * Récupère les dépendances de cette fixture.
+     *
+     * @return array Un tableau de classes fixtures sur lesquelles cette fixture dépend.
+     */
     public function getDependencies():array
     {
         return [

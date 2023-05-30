@@ -7,9 +7,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * Contrôleur gérant les utilisateurs dans l'administration.
+ *
+ * @Route("/admin/utilisateurs", name="admin_users_")
+ */
 #[Route('/admin/utilisateurs', name: 'admin_users_')]
 class UsersController extends AbstractController
 {
+    /**
+     * Affiche la liste des utilisateurs.
+     *
+     * @param UsersRepository $usersRepository Le référentiel (repository) des utilisateurs
+     *
+     * @return Response La réponse HTTP
+     *
+     * @Route("/", name="index")
+     */
     #[Route('/', name: 'index')]
     public function index(UsersRepository $usersRepository): Response
     {
